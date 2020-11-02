@@ -1,0 +1,542 @@
+<svg>
+  <filter id="common__fe_color_matrix--colorize-red">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 1 1 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-red-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.1 0.1 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-red-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.2 0.2 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-red-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.3 0.3 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-red-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.4 0.4 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-red-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.5 0.5 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-red-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.6 0.6 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-red-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.7 0.7 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-red-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.8 0.8 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-red-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.9 0.9 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-green">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 1 1 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-green-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .1 .1 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-green-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .2 .2 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-green-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .3 .3 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-green-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .4 .4 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-green-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .5 .5 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-green-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .6 .6 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-green-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .7 .7 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-green-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .8 .8 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-green-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .9 .9 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-blue">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              1 1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-blue-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.1 0.1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-blue-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.2 0.2 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-blue-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.3 0.3 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-blue-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.4 0.4 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-blue-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.5 0.5 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-blue-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.6 0.6 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-blue-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.7 0.7 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-blue-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.8 0.8 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-blue-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.9 0.9 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-yellow">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 1 1 0 0
+              1 1 1 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-yellow-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.1 0.1 0 0
+              0.1 1 0.1 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-yellow-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.2 0.2 0 0
+              0.2 1 0.2 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-yellow-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.3 0.3 0 0
+              0.3 1 0.3 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-yellow-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.4 0.4 0 0
+              0.4 1 0.4 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-yellow-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.5 0.5 0 0
+              0.5 1 0.5 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-yellow-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.6 0.6 0 0
+              0.6 1 0.6 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-yellow-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.7 0.7 0 0
+              0.7 1 0.7 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-yellow-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.8 0.8 0 0
+              0.8 1 0.8 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-yellow-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.9 0.9 0 0
+              0.9 1 0.9 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-magenta">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 1 1 0 0
+              0 1 0 0 0
+              1 1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-magenta-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.1 0.1 0 0
+              0 1 0 0 0
+              0.1 0.1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-magenta-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.2 0.2 0 0
+              0 1 0 0 0
+              0.2 0.2 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-magenta-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.3 0.3 0 0
+              0 1 0 0 0
+              0.3 0.3 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-magenta-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.4 0.4 0 0
+              0 1 0 0 0
+              0.4 0.4 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-magenta-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.5 0.5 0 0
+              0 1 0 0 0
+              0.5 0.5 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-magenta-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.6 0.6 0 0
+              0 1 0 0 0
+              0.6 0.6 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-magenta-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.7 0.7 0 0
+              0 1 0 0 0
+              0.7 0.7 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-magenta-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.8 0.8 0 0
+              0 1 0 0 0
+              0.8 0.8 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-magenta-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.9 0.9 0 0
+              0 1 0 0 0
+              0.9 0.9 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-cyan">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 1 1 0 0
+              1 1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-cyan-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.1 1 0.1 0 0
+              0.1 0.1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-cyan-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.2 1 0.2 0 0
+              0.2 0.2 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-cyan-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.3 1 0.3 0 0
+              0.3 0.3 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-cyan-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.4 1 0.4 0 0
+              0.4 0.4 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-cyan-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.5 1 0.5 0 0
+              0.5 0.5 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-cyan-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.6 1 0.6 0 0
+              0.6 0.6 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-cyan-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.7 1 0.7 0 0
+              0.7 0.7 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-cyan-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.8 1 0.8 0 0
+              0.8 0.8 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="common__fe_color_matrix--colorize-cyan-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.9 1 0.9 0 0
+              0.9 0.9 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+</svg>
