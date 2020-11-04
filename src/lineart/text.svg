@@ -430,7 +430,18 @@
     </feMerge>
   </filter>
 
-  <filter id="custom__text--grungy">
+  <filter id="custom__text--grundge1">
+    <!-- 1. create an feTurbulence fractal fill -->
+
+    <feTurbulence result="TURBULENCE" baseFrequency="0.08"
+    numOctaves="1" seed="1" />
+
+    <!-- 2. create a displacement map that takes the fractal fill as an input to distort the target: -->
+
+    <feDisplacementMap in="SourceGraphic" in2="TURBULENCE" scale="9" />
+  </filter>
+
+  <filter id="custom__text--grundge2">
     <!-- COLORS -->
       <feFlood flood-color="#582D1B" result="COLOR-red"></feFlood>
     <!-- COLORS END -->
@@ -537,4 +548,5 @@
         <feMergeNode in="COMPOSITE"/>
     </feMerge>
   </filter>
+
 </svg>

@@ -1,0 +1,32 @@
+<svg>
+  <filter id="color__saturation--grayscale" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-1/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.9" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-2/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.8" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-3/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.7" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-4/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.6" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-5/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.5" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-6/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.4" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-7/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.3" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-8/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.2" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-9/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.1" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+</svg>
