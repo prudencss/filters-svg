@@ -1,3 +1,36 @@
 <svg>
-
+  <foreignObject>
+    <object
+      type="image/svg+xml"
+      data="./color/alpha.svg"
+    />
+    <object
+      type="image/svg+xml"
+      data="./color/filter.svg"
+    />
+    <object
+      type="image/svg+xml"
+      data="./color/colorize.svg"
+    />
+    <object
+      type="image/svg+xml"
+      data="./color/saturation.svg"
+    />
+  </foreignObject>
+  <foreignObject>
+    <object
+      type="image/svg+xml"
+      data="./focus/sharpen.svg"
+    />
+  </foreignObject>
+  <foreignObject>
+    <object
+      type="image/svg+xml"
+      data="./lineart/edge.svg"
+    />
+    <object
+      type="image/svg+xml"
+      data="./lineart/text.svg"
+    />
+  </foreignObject>
 </svg>

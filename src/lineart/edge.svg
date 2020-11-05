@@ -1,17 +1,17 @@
 <svg>
-  <filter id="common__fe_convolve_matrix--edge">
+  <filter id="lineart__edge--edge">
     <feConvolveMatrix id="matrixer" in="SourceGraphic" order="3,3" kernelMatrix="-1  -1  -1 -1   7  -1 -1  -1  -1" />
   </filter>
 
-  <filter id="common__fe_convolve_matrix--emboss">
+  <filter id="lineart__edge--emboss">
     <feConvolveMatrix in="SourceGraphic" kernelMatrix="1 0 0 0 0 0 0 0 -1" />
   </filter>
 
-  <filter id="common__fe_convolve_matrix--emboss2">
+  <filter id="lineart__edge--emboss2">
     <feConvolveMatrix order="3" preserveAlpha="true" kernelMatrix=" -4 0 0 0 1 0 0 0 4" divisor="1" bias="0" />
   </filter>
 
-  <filter id="common__fe_convolve_matrix--bevel">
+  <filter id="lineart__edge--bevel">
     <feConvolveMatrix order="8,8" divisor="4" kernelMatrix="1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 " in="SourceAlpha" result="bevel"></feConvolveMatrix>
     <feMerge>
       <feMergeNode in="bevel"/>
@@ -19,17 +19,17 @@
     </feMerge>
   </filter>
 
-  <filter id="common__fe_convolve_matrix--edge-detection">
+  <filter id="lineart__edge--edge-detection">
     <feConvolveMatrix order="3" preserveAlpha="true" kernelMatrix=" -1 -1 -1 -1 8 -1 -1 -1 -1" divisor="1.0" bias="0.0" />
   </filter>
 
-  <filter id="custom__edge--edge">
+  <filter id="lineart__edge--edge">
     <feColorMatrix type="luminanceToAlpha" />
     <feConvolveMatrix order="3" kernelMatrix="-1 -2 -1 0 0 0 1 2 1" />
     <feConvolveMatrix order="3" kernelMatrix="-1 -2 -1 0 0 0 1 2 1" />
   </filter>
 
-  <filter id="custom__edge--sobel" x="0%" y="0%" width="100%" height="100%">
+  <filter id="lineart__edge--sobel" x="0%" y="0%" width="100%" height="100%">
     <!-- convert source image to luminance map-->
     <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1
                                          0 0 0 0 1
@@ -103,7 +103,7 @@
     <feComposite operator="over" in="finaledges"/>
   </filter>
 
-  <filter id="custom__edge--sobel2" color-interpolation-filters="sRGB">
+  <filter id="lineart__edge--sobel2" color-interpolation-filters="sRGB">
     <feColorMatrix type="matrix" in="SourceGraphic" result="RA" values="0 0 0 0 1
           0 0 0 0 1
           0 0 0 0 1
@@ -141,7 +141,7 @@
     <feComposite in="RSGS" in2="BS" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"></feComposite>
   </filter>
 
-  <filter id="sobel" color-interpolation-filters="sRGB">
+  <filter id="lineart__edge--sobel3" color-interpolation-filters="sRGB">
     <feConvolveMatrix in="SourceGraphic" order="3" preserveAlpha="true" kernelMatrix="-1 -2 -1
       0 0 0
       1 2 1 " result="VP" />

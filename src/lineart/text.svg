@@ -1,6 +1,6 @@
 <svg>
 
-  <filter id="custom__text--splash" width="150%" height="160%" x="-25%" y="-25%">
+  <filter id="lineart__text--splash" width="150%" height="160%" x="-25%" y="-25%">
     <!-- COLORS -->
       <feFlood flood-color="#16B5FF" result="COLOR-blue"></feFlood>‚
       <feFlood flood-color="#9800FF" result="COLOR-violet"></feFlood>
@@ -46,7 +46,7 @@
     <feComposite operator="arithmetic" k1="0" k2="1" k3="1" k4="0" in="LIGHT-EFFECTS_10" in2="LIGHT-EFFECTS_50" result="LIGHT-EFFECTS_60"></feComposite>
   </filter>
 
-  <filter id="custom__text--comic-header-industrial" filterUnits="userSpaceOnUse">
+  <filter id="lineart__text--comic-header-industrial" filterUnits="userSpaceOnUse">
     <!-- COLORS -->
       <feFlood flood-color="#663300" result="COLOR-red"></feFlood>‚
       <feFlood flood-color="#D7A500" result="COLOR-y"></feFlood>
@@ -90,7 +90,7 @@
     </feMerge>
   </filter>
 
-  <filter id="custom__text--vintage">
+  <filter id="lineart__text--vintage">
     <!-- Colors: -->
       <feFlood flood-color="#4CFED7" flood-opacity="1" result="COL_green-l"></feFlood>
       <feFlood flood-color="#0A4D39" flood-opacity="1" result="COL_green-m"></feFlood>
@@ -187,7 +187,7 @@
 
   </filter>
 
-  <filter id="custom__text--blast-striped" filterUnits="userSpaceOnUse">
+  <filter id="lineart__text--blast-striped" filterUnits="userSpaceOnUse">
     <!-- COLORS -->
     <feFlood flood-color="white" result="COLOR-white"></feFlood>
     <feFlood flood-color="black" result="COLOR-black"></feFlood>
@@ -234,7 +234,7 @@
     </feMerge>
   </filter>
 
-  <filter id="custom__text--sketchy1">
+  <filter id="lineart__text--sketchy1">
     <!-- COLOR -->
     <feFlood flood-color="#73DCFF" flood-opacity="0.75" result="COLOR-blu"></feFlood>
     <feFlood flood-color="#9673FF" flood-opacity="0.4" result="COLOR-red"></feFlood>
@@ -292,7 +292,7 @@
     </feMerge>
   </filter>
 
-  <filter id="custom__text--posterize1">
+  <filter id="lineart__text--posterize1">
     <!-- COLORS -->
     <feFlood flood-color="#551C0B" result="COLOR-outline"></feFlood>
     <!-- COLORS END -->
@@ -330,7 +330,7 @@
     </feMerge>
   </filter>
 
-  <filter id="custom__text--posterize2">
+  <filter id="lineart__text--posterize2">
     <!-- COLORS -->
     <feFlood flood-color="#551C0B" result="COLOR-outline"></feFlood>
     <!-- COLORS END-->
@@ -363,7 +363,7 @@
     </feMerge>
   </filter>
 
-  <filter id="custom__text--posterize3" height="220%">
+  <filter id="lineart__text--posterize3" height="220%">
     <!-- COLORS -->
     <feFlood flood-color="#551C0B" result="COLOR-outline"></feFlood>
     <!-- COLORS END-->
@@ -395,7 +395,7 @@
     </feMerge>
   </filter>
 
-  <filter id="custom__text--posterize4" height="220%">
+  <filter id="lineart__text--posterize4" height="220%">
     <!-- COLORS -->
     <feFlood flood-color="#551C0B" result="COLOR-outline"></feFlood>
     <feFlood flood-color="#551C0B" flood-opacity="0" result="TRANSPARENT"></feFlood>
@@ -430,7 +430,7 @@
     </feMerge>
   </filter>
 
-  <filter id="custom__text--grundge1">
+  <filter id="lineart__text--grundge1">
     <!-- 1. create an feTurbulence fractal fill -->
 
     <feTurbulence result="TURBULENCE" baseFrequency="0.08"
@@ -441,7 +441,7 @@
     <feDisplacementMap in="SourceGraphic" in2="TURBULENCE" scale="9" />
   </filter>
 
-  <filter id="custom__text--grundge2">
+  <filter id="lineart__text--grundge2">
     <!-- COLORS -->
       <feFlood flood-color="#582D1B" result="COLOR-red"></feFlood>
     <!-- COLORS END -->
@@ -473,18 +473,18 @@
     <feComposite in2="FRACTAL-TEXTURE_20" in="BEVEL_50" operator="in"></feComposite>
   </filter>
 
-  <filter id="custo__text--outlined">
+  <filter id="lineart__text--outlined">
     <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="OUTLINE"/>
     <feComposite operator="out" in="OUTLINE" in2="SourceAlpha"/>
   </filter>
 
-  <filter id="custom__text--offset">
+  <filter id="lineart__text--offset">
     <!-- Offset the input graphic by the amount defined in its "dx" and "dy" attributes: -->
 
     <feOffset in="SourceGraphic" dx="10" dy="10" />
   </filter>
 
-  <filter id="custom__text--extruded">
+  <filter id="lineart__text--extruded">
     <!-- Define a convolve matrix that applies a bevel. -->
 
     <!-- Order defines the depth of the extrusion; angle is defined by the position of "1" in the matrix. Here we see a 45-degree, 4-pixel deep extrusion: -->
@@ -508,11 +508,11 @@
     </feMerge>
   </filter>
 
-  <filter id="custom__text--noise-fill">
+  <filter id="lineart__text--noise-fill">
     <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="5" seed="2" />
   </filter>
 
-  <filter id="custom__text--pattern-striped">
+  <filter id="lineart__text--pattern-striped">
     <!-- The following code will create a 100 × 200-pixel square filled with "myfill.svg": -->
 
     <feImage xlink:href='data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%2250%22%20height%3D%2250%20%2F%3E%3C%2Fsvg%3E' x="0" y="0" width="100" height="200" result="IMAGEFILL"/>
@@ -526,7 +526,7 @@
     <feComposite operator="in" in="TILEPATTERN" in2="SourceAlpha" />
   </filter>
 
-  <filter id="custom__text--bevel">
+  <filter id="lineart__text--bevel">
     <!--We create a heightmap by blurring the source: -->
 
     <feGaussianBlur stdDeviation="5" in="SourceAlpha" result="BLUR"/>
