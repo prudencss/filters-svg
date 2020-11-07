@@ -1,5 +1,3 @@
-<svg>
-  <filter id="focus__sharpen--sharpen">
-    <feConvolveMatrix order="3" preserveAlpha="true" kernelMatrix=" -1 -1 -1 -1 9 -1 -1 -1 -1" divisor="1.0" bias="0.0" />
-  </filter>
-</svg>
+<filter id="focus__sharpen--sharpen">
+  <feConvolveMatrix order="3" preserveAlpha="true" kernelMatrix=" -1 -1 -1 -1 9 -1 -1 -1 -1" divisor="1.0" bias="0.0" />
+</filter>

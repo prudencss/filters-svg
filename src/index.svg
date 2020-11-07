@@ -1,36 +1,1880 @@
-<svg>
-  <foreignObject>
-    <object
-      type="image/svg+xml"
-      data="./color/alpha.svg"
+<svg xmlns="http://www.w3.org/2000/svg">
+  <filter id="focus__sharpen--sharpen">
+    <feConvolveMatrix order="3" preserveAlpha="true" kernelMatrix=" -1 -1 -1 -1 9 -1 -1 -1 -1" divisor="1.0" bias="0.0" />
+  </filter>
+
+
+
+  <filter id="lineart__edge--edge">
+    <feConvolveMatrix id="matrixer" in="SourceGraphic" order="3,3" kernelMatrix="-1  -1  -1 -1   7  -1 -1  -1  -1" />
+  </filter>
+
+  <filter id="lineart__edge--emboss">
+    <feConvolveMatrix in="SourceGraphic" kernelMatrix="1 0 0 0 0 0 0 0 -1" />
+  </filter>
+
+  <filter id="lineart__edge--emboss2">
+    <feConvolveMatrix order="3" preserveAlpha="true" kernelMatrix=" -4 0 0 0 1 0 0 0 4" divisor="1" bias="0" />
+  </filter>
+
+  <filter id="lineart__edge--bevel">
+    <feConvolveMatrix order="8,8" divisor="4" kernelMatrix="1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 " in="SourceAlpha" result="bevel"></feConvolveMatrix>
+    <feMerge>
+      <feMergeNode in="bevel"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
+  </filter>
+
+  <filter id="lineart__edge--edge-detection">
+    <feConvolveMatrix order="3" preserveAlpha="true" kernelMatrix=" -1 -1 -1 -1 8 -1 -1 -1 -1" divisor="1.0" bias="0.0" />
+  </filter>
+
+  <filter id="lineart__edge--edge">
+    <feColorMatrix type="luminanceToAlpha" />
+    <feConvolveMatrix order="3" kernelMatrix="-1 -2 -1 0 0 0 1 2 1" />
+    <feConvolveMatrix order="3" kernelMatrix="-1 -2 -1 0 0 0 1 2 1" />
+  </filter>
+
+  <filter id="lineart__edge--sobel" x="0%" y="0%" width="100%" height="100%">
+    <!-- convert source image to luminance map-->
+    <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1
+                                         0 0 0 0 1
+                                         0 0 0 0 1
+                                         1 0 0 0 0" result="RChan" />
+
+    <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1
+                                       0 0 0 0 1
+                                       0 0 0 0 1
+                                       0 1 0 0 0" result="GChan" />
+
+
+    <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1
+                                       0 0 0 0 1
+                                       0 0 0 0 1
+                                       0 0 1 0 0" result="BChan" />
+
+    <!-- sobel edge detection-->
+
+
+    <feConvolveMatrix in="RChan" order="3" kernelMatrix="-1 -2 -1
+                                               0 0 0
+                                               1 2 1 "
+                                               result="Rhor" />
+
+    <feConvolveMatrix in="RChan" order="3" kernelMatrix="-1 0 1
+                                                         -2 0 2
+                                                         -1 0 1"  result="Rver"  />
+
+   <feComposite operator="arithmetic" k2="1" k3="1" in="Rhor" in2="Rver" />
+   <feColorMatrix type="matrix" values="0 0 0 1 0
+                                        0 0 0 0 0
+                                        0 0 0 0 0
+                                        0 0 0 0 1" result="rededge"/>
+
+
+   <feConvolveMatrix in="GChan" order="3" kernelMatrix="-1 -2 -1
+                                                         0 0 0
+                                                         1 2 1"
+                                                         result="Ghor" />
+
+    <feConvolveMatrix in="GChan" order="3" kernelMatrix="-1 0 1
+                                                         -2 0 2
+                                                         -1 0 1"  result="Gver"  />
+
+   <feComposite operator="arithmetic" k2="1" k3="1" in="Ghor" in2="Gver" />
+   <feColorMatrix type="matrix" values="0 0 0 0 0
+                                    0 0 0 1 0
+                                    0 0 0 0 0
+                                    0 0 0 0 1" result="greenedge"/>
+
+
+   <feConvolveMatrix in="BChan" order="3" kernelMatrix="-1 -2 -1
+                                               0 0 0
+                                               1 2 1 " result="Bhor" />
+
+    <feConvolveMatrix in="BChan" order="3" kernelMatrix="-1 0 1
+                                                         -2 0 2
+                                                         -1 0 1"  result="Bver"  />
+
+   <feComposite operator="arithmetic" k2="1" k3="1" in="Bhor" in2="Bver"/>
+   <feColorMatrix type="matrix" values="0 0 0 0 0
+                                        0 0 0 0 0
+                                        0 0 0 1 0
+                                        0 0 0 0 1" result="blueedge"/>
+
+    <feComposite operator="arithmetic" in="blueedge" in2="rededge" k2="1" k3="1"/>
+    <feComposite operator="arithmetic" in2="greenedge" k2="1" k3="1" result="finaledges"/>
+
+    <feFlood flood-color="black" result="black"/>
+    <feComposite operator="over" in="finaledges"/>
+  </filter>
+
+  <filter id="lineart__edge--sobel2" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" in="SourceGraphic" result="RA" values="0 0 0 0 1
+          0 0 0 0 1
+          0 0 0 0 1
+          1 0 0 0 0"></feColorMatrix>
+    <feColorMatrix type="matrix" in="SourceGraphic" result="GA" values="0 0 0 0 1
+          0 0 0 0 1
+          0 0 0 0 1
+          0 1 0 0 0"></feColorMatrix>
+    <feColorMatrix type="matrix" in="SourceGraphic" result="BA" values="0 0 0 0 1
+          0 0 0 0 1
+          0 0 0 0 1
+          0 0 1 0 0"></feColorMatrix>
+    <feDiffuseLighting in="RA" result="R" surfaceScale="8.0">
+      <feDistantLight elevation="90"></feDistantLight>
+    </feDiffuseLighting>
+    <feDiffuseLighting in="GA" result="G" surfaceScale="8.0">
+      <feDistantLight elevation="90"></feDistantLight>
+    </feDiffuseLighting>
+    <feDiffuseLighting in="BA" result="B" surfaceScale="8.0">
+      <feDistantLight elevation="90"></feDistantLight>
+    </feDiffuseLighting>
+    <feColorMatrix type="matrix" in="R" result="RS" values="-1 0 0 0 1
+          0 0 0 0 0
+          0 0 0 0 0
+          0 0 0 0 1"></feColorMatrix>
+    <feColorMatrix type="matrix" in="G" result="GS" values="0 0 0 0 0
+          0 -1 0 0 1
+          0 0 0 0 0
+          0 0 0 0 1"></feColorMatrix>
+    <feColorMatrix type="matrix" in="B" result="BS" values="0 0 0 0 0
+          0 0 0 0 0
+          0 0 -1 0 1
+          0 0 0 0 1"></feColorMatrix>
+    <feComposite in="RS" in2="GS" result="RSGS" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"></feComposite>
+    <feComposite in="RSGS" in2="BS" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"></feComposite>
+  </filter>
+
+  <filter id="lineart__edge--sobel3" color-interpolation-filters="sRGB">
+    <feConvolveMatrix in="SourceGraphic" order="3" preserveAlpha="true" kernelMatrix="-1 -2 -1
+      0 0 0
+      1 2 1 " result="VP" />
+    <feConvolveMatrix in="SourceGraphic" order="3" preserveAlpha="true" kernelMatrix="1 2 1
+      0 0 0
+      -1 -2 -1 " result="VN" />
+    <feConvolveMatrix in="SourceGraphic" order="3" preserveAlpha="true" kernelMatrix="-1 0 1
+      -2 0 2
+      -1 0 1 " result="HP" />
+    <feConvolveMatrix in="SourceGraphic" order="3" preserveAlpha="true" kernelMatrix="1 0 -1
+      2 0 -2
+      1 0 -1 " result="HN" />
+    <feComposite operator="arithmetic" in="VN" in2="VP" k2="1" k3="1" result="V" />
+    <feComposite operator="arithmetic" in="HN" in2="HP" k2="1" k3="1" result="H" />
+    <!-- <feComposite operator="arithmetic" in="V" in2="H" k2="1" k3="1" /> -->
+    <feBlend mode="lighten" in="H" in2="V" />
+  </filter>
+
+
+
+
+  <filter id="lineart__text--splash">
+    <!-- COLORS -->
+      <feFlood flood-color="#16B5FF" result="COLOR-blue"></feFlood>‚
+      <feFlood flood-color="#9800FF" result="COLOR-violet"></feFlood>
+      <feFlood flood-color="#A64DFF" result="COLOR-violet-light"></feFlood>
+    <!-- COLORS END -->
+
+    <!-- BOTTOM SPLASH -->
+      <feTurbulence baseFrequency="0.05" type="fractalNoise" numOctaves="1" seed="2" result="BOTTOM-SPLASH_10"></feTurbulence>
+      <feGaussianBlur stdDeviation="6.5" in="SourceAlpha" result="BOTTOM-SPLASH_20"></feGaussianBlur>
+      <feDisplacementMap scale="420" in="BOTTOM-SPLASH_20" in2="BOTTOM-SPLASH_10" result="BOTTOM-SPLASH_30"></feDisplacementMap>
+      <feComposite operator="in" in="COLOR-blue" in2="BOTTOM-SPLASH_30" result="BOTTOM-SPLASH_40"></feComposite>
+    <!-- BOTTOM END -->
+
+    <!-- MIDDLE SPLASH -->
+      <feTurbulence baseFrequency="0.1" type="fractalNoise" numOctaves="1" seed="1" result="MIDDLE-SPLASH_10"></feTurbulence>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="0.1" result="MIDDLE-SPLASH_20"></feGaussianBlur>
+      <feDisplacementMap in="MIDDLE-SPLASH_20" in2="MIDDLE-SPLASH_10" scale="25" result="MIDDLE-SPLASH_30"></feDisplacementMap>
+      <feComposite in="COLOR-violet-light" in2="MIDDLE-SPLASH_30" operator="in" result="MIDDLE-SPLASH_40"></feComposite>
+    <!-- MIDDLE END -->
+
+    <!-- TOP SPLASH -->
+      <feTurbulence baseFrequency="0.07" type="fractalNoise" numOctaves="1" seed="1" result="TOP-SPLASH_10"></feTurbulence>
+      <feGaussianBlur stdDeviation="3.5" in="SourceAlpha" result="TOP-SPLASH_20"></feGaussianBlur>
+      <feDisplacementMap scale="220" in="TOP-SPLASH_20" in2="TOP-SPLASH_10" result="TOP-SPLASH_30"></feDisplacementMap>
+      <feComposite operator="in" in="COLOR-violet" in2="TOP-SPLASH_30" result="TOP-SPLASH_40"></feComposite>
+    <!-- TOP END -->
+
+    <!-- LIGHT EFFECTS -->
+    <feMerge result="LIGHT-EFFECTS_10">
+      <feMergeNode in="BOTTOM-SPLASH_40"></feMergeNode>
+      <feMergeNode in="MIDDLE-SPLASH_40"></feMergeNode>
+      <feMergeNode in="TOP-SPLASH_40"></feMergeNode>
+    </feMerge>
+    <feColorMatrix type="matrix" values="0 0 0 0 0,
+    0 0 0 0 0,
+    0 0 0 0 0,
+    0 0 0 1 0" in="LIGHT-EFFECTS_10" result="LIGHT-EFFECTS_20"></feColorMatrix>
+    <feGaussianBlur stdDeviation="2" in="LIGHT-EFFECTS_20" result="LIGHT-EFFECTS_30"></feGaussianBlur>
+    <feSpecularLighting surfaceScale="5" specularConstant=".75" specularExponent="30" lighting-color="#white" in="LIGHT-EFFECTS_30" result="LIGHT-EFFECTS_40">
+      <fePointLight x="-50" y="-100" z="400"></fePointLight>
+    </feSpecularLighting>
+    <feComposite operator="in" in="LIGHT-EFFECTS_40" in2="LIGHT-EFFECTS_20" result="LIGHT-EFFECTS_50"></feComposite>
+    <feComposite operator="arithmetic" k1="0" k2="1" k3="1" k4="0" in="LIGHT-EFFECTS_10" in2="LIGHT-EFFECTS_50" result="LIGHT-EFFECTS_60"></feComposite>
+  </filter>
+
+  <filter id="lineart__text--comic-header-industrial" filterUnits="userSpaceOnUse">
+    <!-- COLORS -->
+      <feFlood flood-color="#663300" result="COLOR-red"></feFlood>‚
+      <feFlood flood-color="#D7A500" result="COLOR-y"></feFlood>
+    <!-- COLORS END -->
+
+    <!-- STRIPE FILL -->
+        <feImage href="data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.1%22%20id%3D%22Untitled-Seite_x25_201%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%2210px%22%20height%3D%224px%22%3E%0A%3Crect%20fill%3D%22%239F6B00%22%20width%3D%2210%22%20height%3D%222%22%2F%3E%3C%2Fsvg%3E" x="0" y="0" width="10" height="4" result="STRIPE FILL_10"></feImage>
+      <feTile in="STRIPE FILL_10" result="STRIPE FILL_20"></feTile>
+      <feComposite operator="in" in="STRIPE FILL_20" in2="SourceAlpha" result="STRIPE FILL_30"></feComposite>
+    <!-- STRIPE FILL END -->
+
+    <!-- THIN BEVEL -->
+      <feMorphology operator="dilate" radius="2" in="SourceAlpha" result="THIN-BEVEL_10"></feMorphology>
+      <feComposite operator="out" in="THIN-BEVEL_10" in2="SourceAlpha" result="THIN-BEVEL_20"></feComposite>
+      <feComposite operator="in" in="COLOR-y" in2="THIN-BEVEL_20" result="THIN-BEVEL_30"></feComposite>
+    <!-- THIN BEVEL END -->
+
+    <!-- OUTER BEVEL -->
+    <feConvolveMatrix order="8,8" divisor="1" kernelMatrix="1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 " in="SourceGraphic" result="OUTER-BEVEL_10"></feConvolveMatrix>
+      <feOffset dx="4" dy="4" in="OUTER-BEVEL_10" result="OUTER-BEVEL_20"></feOffset>
+      <feComposite operator="in" in="COLOR-red" in2="OUTER-BEVEL_20" result="OUTER-BEVEL_30"></feComposite>
+     <!-- OUTER BEVEL END -->
+
+    <!-- INNER BEVEL -->
+      <feOffset in="SourceAlpha" dx="4" dy="4" result="INNER-BEVEL_10"></feOffset>
+      <feComposite operator="out" in="SourceAlpha" in2="INNER-BEVEL_10" result="INNER-BEVEL_20"></feComposite>
+      <feComposite in="COLOR-red" operator="in" in2="INNER-BEVEL_20" result="INNER-BEVEL_30"></feComposite>
+    <!--  INNER BEVEL END -->
+
+    <!-- FAT OUTLINE -->
+      <feMorphology operator="dilate" radius="6" in="OUTER-BEVEL_30" result="FAT-OUTLINE_10"></feMorphology>
+      <feComposite operator="in" in="COLOR-y" in2="FAT-OUTLINE_10" result="FAT-OUTLINE_20"></feComposite>
+    <!-- FAT OUTLINE END -->
+
+    <feMerge result="merge2">
+      <feMergeNode in="FAT-OUTLINE_20"></feMergeNode>
+      <feMergeNode in="OUTER-BEVEL_30"></feMergeNode>
+      <feMergeNode in="STRIPE FILL_30"></feMergeNode>
+      <feMergeNode in="INNER-BEVEL_30"></feMergeNode>
+      <feMergeNode in="THIN-BEVEL_30"></feMergeNode>
+    </feMerge>
+  </filter>
+
+  <filter id="lineart__text--vintage">
+    <!-- Colors: -->
+      <feFlood flood-color="#4CFED7" flood-opacity="1" result="COL_green-l"></feFlood>
+      <feFlood flood-color="#0A4D39" flood-opacity="1" result="COL_green-m"></feFlood>
+      <feFlood flood-color="#2A9B83" flood-opacity="1" result="COL_green-d"></feFlood>
+      <feFlood flood-color="#FA5C71" flood-opacity="1" result="COL_red-l"></feFlood>
+      <feFlood flood-color="#A5122B" flood-opacity="1" result="COL_red-d"></feFlood>
+      <feFlood flood-color="rgba(0,0,0,0)" flood-opacity="0" result="TRANSPARENT"></feFlood>
+    <!-- Colors end -->
+
+    <!-- Lower Green Bevel -->
+      <feMorphology operator="dilate" radius="10" in="SourceAlpha" result="GREEN-BEVEL-1_10"></feMorphology>
+      <feConvolveMatrix order="8,8" divisor="1" kernelMatrix="1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1" in="GREEN-BEVEL-1_10" result="GREEN-BEVEL-1_20"></feConvolveMatrix>
+      <feComposite operator="in" in="COL_green-d" in2="GREEN-BEVEL-1_20" result="GREEN-BEVEL-1_30"></feComposite>
+    <!-- Lower Green Bevel End -->
+
+    <!-- Lower Green Front -->
+      <feComposite operator="in" in="COL_green-l" in2="GREEN-BEVEL-1_10" result="GREEN-FRONT-1_0"></feComposite>
+      <feOffset dx="4" dy="4" in="GREEN-FRONT-1_0" result="GREEN-FRONT-1_10"></feOffset>
+      <feSpecularLighting surfaceScale="0" specularConstant=".75" specularExponent="30" lighting-color="#white" in="GREEN-FRONT-1_10" result="GREEN-FRONT-1_20">
+        <fePointLight x="0" y="-30" z="400"></fePointLight>
+      </feSpecularLighting>
+      <feComposite operator="out" in2="GREEN-FRONT-1_20" in="GREEN-FRONT-1_10" result="GREEN-FRONT-1_30"></feComposite>
+    <!-- Lower Green Front End -->
+
+    <!-- Upper Green Bevel -->
+      <feMorphology operator="dilate" radius="7" in="SourceAlpha" result="GREEN-BEVEL-2_0"></feMorphology>
+      <feConvolveMatrix order="8,8" divisor="1" kernelMatrix="1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1" in="GREEN-BEVEL-2_0" result="GREEN-BEVEL-2_10"></feConvolveMatrix>
+      <feComposite operator="in" in="COL_green-d" in2="GREEN-BEVEL-2_10" result="GREEN-BEVEL-2_20"></feComposite>
+      <feOffset dx="9" dy="9" in="GREEN-BEVEL-2_20" result="GREEN-BEVEL-2_30"></feOffset>
+    <!-- Upper Green Bevel end -->
+
+    <!-- Upper Green Front -->
+      <feOffset dx="18" dy="18" in="GREEN-BEVEL-2_0" result="GREEN-FRONT-2_10"></feOffset>
+      <feComposite operator="in" in="COL_green-l" in2="GREEN-FRONT-2_10" result="GREEN-FRONT-2_20"></feComposite>
+      <feSpecularLighting surfaceScale="0" specularConstant="0.75" specularExponent="40" lighting-color="#white" in="GREEN-FRONT-2_20" result="GREEN-FRONT-2_30">
+        <fePointLight x="120" y="170" z="500"></fePointLight>
+      </feSpecularLighting>
+       <feComposite operator="in" in2="GREEN-FRONT-2_10" in="GREEN-FRONT-2_30" result="GREEN-FRONT-2_40"></feComposite>
+    <!-- Upper Green Front end -->
+
+    <!-- Bevels and Front shaded -->
+      <feMerge result="SHADED-BEVELS_0">
+        <feMergeNode in="GREEN-BEVEL-1_10"></feMergeNode>
+        <feMergeNode in="GREEN-FRONT-1_30"></feMergeNode>
+        <feMergeNode in="GREEN-BEVEL-2_30"></feMergeNode>
+        <feMergeNode in="GREEN-FRONT-2_20"></feMergeNode>
+        <feMergeNode in="GREEN-FRONT-2_40"></feMergeNode>
+        <feMergeNode in="TRANSPARENT"></feMergeNode>
+      </feMerge>
+
+      <feSpecularLighting surfaceScale="0" specularConstant="0.45" specularExponent="30" lighting-color="#white" in="SHADED-BEVELS_0" result="SHADED-BEVELS_10">
+          <fePointLight x="320" y="-20" z="400"></fePointLight>
+      </feSpecularLighting>
+      <feComposite operator="in" in2="SHADED-BEVELS_0" in="SHADED-BEVELS_10" result="SHADED-BEVELS_30"></feComposite>
+    <!-- Bevels and Front shaded end -->
+
+    <!-- Upper Red Bevel -->
+      <feConvolveMatrix order="4,4" divisor="1" kernelMatrix="1 0 0 0
+      0 1 0 0
+      0 0 1 0
+      0 0 0 1" in="SourceAlpha" result="RED-BEVEL-0_0"></feConvolveMatrix>
+      <feComposite in="COL_red-d" in2="RED-BEVEL-0_0" operator="in" result="RED-BEVEL-0_10"></feComposite>
+      <feOffset dx="20" dy="20" in="RED-BEVEL-0_10" result="RED-BEVEL-0_20"></feOffset>
+    <!-- Upper Red Bevel end -->
+
+    <!-- Upper Red Front -->
+      <feComposite operator="in" in="COL_red-l" in2="SourceAlpha" result="RED-FRONT-0_0"></feComposite>
+      <feOffset dx="24" dy="24" in="RED-FRONT-0_0" result="RED-FRONT-0_10"></feOffset>
+      <feSpecularLighting surfaceScale="0" specularConstant=".45" specularExponent="30" lighting-color="#white" in="RED-FRONT-0_10" result="RED-FRONT-0_20">
+      <fePointLight x="20" y="180" z="300"></fePointLight>
+      </feSpecularLighting>
+      <feComposite operator="in" in2="RED-FRONT-0_10" in="RED-FRONT-0_20" result="RED-FRONT-0_30"></feComposite>
+    <!-- Upper Red Front end-->
+
+    <!-- Inner Line -->
+      <feMorphology radius="4" in="SourceAlpha" result="INNER-LINE_0"></feMorphology>
+      <feMorphology radius="5" in="SourceAlpha" result="INNER-LINE_10"></feMorphology>
+      <feComposite operator="out" in="INNER-LINE_0" in2="INNER-LINE_10" result="INNER-LINE_20"></feComposite>
+      <feComposite operator="in" in="COL_green-l" in2="INNER-LINE_20" result="INNER-LINE_30"></feComposite>
+      <feOffset dx="24" dy="24" in="INNER-LINE_30" result="INNER-LINE_40"></feOffset>
+    <!-- Inner Line end -->
+
+    <feMerge result="extruded-m">
+
+      <feMergeNode in="SHADED-BEVELS_0"></feMergeNode>
+      <feMergeNode in="SHADED-BEVELS_30"></feMergeNode>
+      <feMergeNode in="RED-BEVEL-0_20"></feMergeNode>
+      <feMergeNode in="RED-FRONT-0_10"></feMergeNode>
+      <feMergeNode in="RED-FRONT-0_30"></feMergeNode>
+      <feMergeNode in="INNER-LINE_40"></feMergeNode>
+
+      <feMergeNode in="TRANSPARENT"></feMergeNode>
+    </feMerge>
+
+  </filter>
+
+  <filter id="lineart__text--blast-striped" filterUnits="userSpaceOnUse">
+    <!-- COLORS -->
+    <feFlood flood-color="white" result="COLOR-white"></feFlood>
+    <feFlood flood-color="black" result="COLOR-black"></feFlood>
+    <feFlood flood-color="rgba(0,0,0,0)" flood-opacity="0" result="TRANSPARENT"></feFlood>
+    <!-- COLORS END -->
+
+    <!-- FAT OUTLINE -->
+    <feMorphology operator="dilate" radius="4" in="SourceAlpha" result="FAT-OUTLINE_10"></feMorphology>
+    <feConvolveMatrix in="FAT-OUTLINE_10" order="6,5" divisor="1" kernelMatrix="0 0 1 1 0 0 0 1 1 1 1 0 1 1 1 1 1 1 0 1 1 1 1 0 0 0 1 1 0 0 " result="FAT-OUTLINE_20"></feConvolveMatrix>
+    <feOffset dx="4" dy="0" in="FAT-OUTLINE_20" result="FAT-OUTLINE_30"></feOffset>
+    <!--  FAT OUTLINE END -->
+
+    <!-- STRIPED SHADOW -->
+    <feImage href="data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100px%22%20height%3D%22200px%22%20%20%3E%0A%09%3Cdefs%3E%0A%09%09%3Cpattern%20id%3D%22pattern%22%20patternUnits%3D%22userSpaceOnUse%22%20width%3D%225px%22%20height%3D%225px%22%20viewBox%3D%220%200%205%205%22%20%3E%0A%09%09%09%3Cpolygon%20points%3D%225%2C0%204.012%2C0%205%2C0.989%20%09%22%2F%3E%0A%09%09%09%3Cpolygon%20points%3D%225%2C5%200%2C0%200%2C0.989%204.01%2C5%20%09%22%2F%3E%0A%09%09%3C%2Fpattern%3E%0A%09%3C%2Fdefs%3E%0A%09%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22url(%23pattern)%22%20%2F%3E%0A%3C%2Fsvg%3E" x="0" y="2" width="100" height="200" result="STRIPED-SHADOW_10"></feImage>
+    <feTile in="STRIPED-SHADOW_10" result="STRIPED-SHADOW_20"></feTile>
+    <feOffset dx="7" dy="8" in="FAT-OUTLINE_30" result="STRIPED-SHADOW_30"></feOffset>
+    <feComposite operator="in" in="STRIPED-SHADOW_20" in2="STRIPED-SHADOW_30" result="STRIPED-SHADOW_40"></feComposite>
+    <feComposite operator="in" in="COLOR-black" in2="STRIPED-SHADOW_40" result="STRIPED-SHADOW_50"></feComposite>
+    <!--   STRIPED SHADOW END -->
+
+    <!-- STRIPED FILL -->
+    <feImage href="data:image/svg+xml;charset=utf-8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22100px%22%20height%3D%22200px%22%20%20%3E%0A%09%3Cdefs%3E%0A%09%09%3Cpattern%20id%3D%22pattern%22%20patternUnits%3D%22userSpaceOnUse%22%20width%3D%2210%22%20height%3D%2210%22%3E%0A%0A%09%09%09%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M0%2C8.239V10h1.761L0%2C8.239z%22%2F%3E%0A%09%09%09%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M5%2C0l5%2C5l0%2C0V3.238L6.762%2C0H5z%22%2F%3E%0A%09%09%09%3Cpolygon%20fill%3D%22%23FFFFFF%22%20points%3D%220%2C3.239%200%2C5%205%2C10%206.761%2C10%20%22%2F%3E%0A%09%09%09%3Cpolygon%20fill%3D%22%23FFFFFF%22%20points%3D%221.762%2C0%200%2C0%2010%2C10%2010%2C8.238%20%22%2F%3E%0A%09%09%3C%2Fpattern%3E%0A%09%3C%2Fdefs%3E%0A%09%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22url(%23pattern)%22%20%2F%3E%0A%3C%2Fsvg%3E" x="0" y="2" width="100" height="200" result="STRIPED-FILL_10"></feImage>
+    <feTile in="STRIPED-FILL_10" result="STRIPED-FILL_20"></feTile>
+    <feComposite operator="in" in="STRIPED-FILL_20" in2="SourceAlpha" result="STRIPED-FILL_30"></feComposite>
+    <feComposite operator="in" in="COLOR-white" in2="STRIPED-FILL_30" result="STRIPED-FILL_40"></feComposite>
+    <!-- STRIPED FILL END -->
+
+    <!-- REFLECTION -->
+    <feGaussianBlur stdDeviation="4" in="SourceAlpha" result="REFLECTION_10"></feGaussianBlur>
+    <feSpecularLighting surfaceScale="7" specularConstant="1.8" specularExponent="30" lighting-color="#white" in="REFLECTION_10" result="REFLECTION_20">
+      <fePointLight x="-100" y="-150" z="250">
+      </fePointLight>
+    </feSpecularLighting>
+    <feComposite in2="SourceAlpha" operator="in" in="REFLECTION_20" result="REFLECTION_30"></feComposite>
+    <!--  REFLECTION END -->
+
+    <feMerge result="merge2">
+      <feMergeNode in="STRIPED-SHADOW_50"></feMergeNode>
+      <feMergeNode in="FAT-OUTLINE_30"></feMergeNode>
+      <feMergeNode in="STRIPED-FILL_40"></feMergeNode>
+      <feMergeNode in="REFLECTION_30"></feMergeNode>
+      <!-- Merging a transparent area is a hack to prevent some browsers from cutting off feMorphology -->
+      <feMergeNode in="TRANSPARENT"></feMergeNode>
+    </feMerge>
+  </filter>
+
+  <filter id="lineart__text--sketchy1">
+    <!-- COLOR -->
+    <feFlood flood-color="#73DCFF" flood-opacity="0.75" result="COLOR-blu"></feFlood>
+    <feFlood flood-color="#9673FF" flood-opacity="0.4" result="COLOR-red"></feFlood>
+    <!-- COLOR END -->
+
+    <!-- Texture -->
+    <feTurbulence baseFrequency=".05" type="fractalNoise" numOctaves="3" seed="0" result="Texture_10"></feTurbulence>
+    <feColorMatrix type="matrix" values="0 0 0 0 0,
+    0 0 0 0 0,
+    0 0 0 0 0,
+    0 0 0 -2.1 1.1" in="Texture_10" result="Texture_20"></feColorMatrix>
+
+    <feColorMatrix result="Texture_30" type="matrix" values="0 0 0 0 0,
+    0 0 0 0 0,
+    0 0 0 0 0,
+    0 0 0 -1.7 1.8" in="Texture_10"></feColorMatrix>
+    <!-- Texture -->
+
+    <!-- FILL -->
+    <feOffset dx="-3" dy="4" in="SourceAlpha" result="FILL_10"></feOffset>
+    <feDisplacementMap scale="17" in="FILL_10" in2="Texture_10" result="FILL_20"></feDisplacementMap>
+    <feComposite operator="in" in="Texture_30" in2="FILL_20" result="FILL_40"></feComposite>
+    <feComposite operator="in" in="COLOR-blu" in2="FILL_40" result="FILL_50"></feComposite>
+    <!-- FILL END-->
+
+    <!-- OUTLINE -->
+    <feMorphology operator="dilate" radius="3" in="SourceAlpha" result="OUTLINE_10"></feMorphology>
+    <feComposite operator="out" in="OUTLINE_10" in2="SourceAlpha" result="OUTLINE_20"></feComposite>
+    <feDisplacementMap scale="7" in="OUTLINE_20" in2="Texture_10" result="OUTLINE_30"></feDisplacementMap>
+    <feComposite operator="arithmetic" k2="-1" k3="1" in="Texture_20" in2="OUTLINE_30" result="OUTLINE_40"></feComposite>
+    <!-- OUTLINE END-->
+
+    <!-- BEVEL OUTLINE -->
+    <feConvolveMatrix order="8,8" divisor="1" kernelMatrix="1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 " in="SourceAlpha" result="BEVEL_10"></feConvolveMatrix>
+    <feMorphology operator="dilate" radius="2" in="BEVEL_10" result="BEVEL_20"></feMorphology>
+    <feComposite operator="out" in="BEVEL_20" in2="BEVEL_10" result="BEVEL_30"></feComposite>
+    <feDisplacementMap scale="7" in="BEVEL_30" in2="Texture_10" result="BEVEL_40"></feDisplacementMap>
+    <feComposite operator="arithmetic" k2="-1" k3="1" in="Texture_20" in2="BEVEL_40" result="BEVEL_50"></feComposite>
+    <feOffset dx="-7" dy="-7" in="BEVEL_50" result="BEVEL_60"></feOffset>
+    <feComposite operator="out" in="BEVEL_60" in2="OUTLINE_10" result="BEVEL_70"></feComposite>
+    <!-- BEVEL OUTLINE END -->
+
+    <!-- BEVEL FILL -->
+    <feOffset dx="-9" dy="-9" in="BEVEL_10" result="BEVEL-FILL_10"></feOffset>
+    <feComposite operator="out" in="BEVEL-FILL_10" in2="OUTLINE_10" result="BEVEL-FILL_20"></feComposite>
+    <feDisplacementMap scale="17" in="BEVEL-FILL_20" in2="Texture_10" result="BEVEL-FILL_30"></feDisplacementMap>
+    <feComposite operator="in" in="COLOR-red" in2="BEVEL-FILL_30" result="BEVEL-FILL_50"></feComposite> <!-- -->
+    <!-- BEVEL FILL END-->
+
+    <feMerge result="merge2">
+     <feMergeNode in="BEVEL-FILL_50"></feMergeNode>
+     <feMergeNode in="BEVEL_70"></feMergeNode>
+     <feMergeNode in="FILL_50"></feMergeNode>
+      <feMergeNode in="OUTLINE_40"></feMergeNode>
+    </feMerge>
+  </filter>
+
+  <filter id="lineart__text--posterize1">
+    <!-- COLORS -->
+    <feFlood flood-color="#551C0B" result="COLOR-outline"></feFlood>
+    <!-- COLORS END -->
+
+    <!-- OUTLINE -->
+    <feMorphology in="SourceAlpha" operator="dilate" radius="5" result="OUTLINE_10"></feMorphology>
+    <feComposite in="COLOR-outline" operator="in" in2="OUTLINE_10" result="OUTLINE_20"></feComposite>
+    <!-- OUTLINE END -->
+
+    <!-- LIGHTING EFFECTS -->
+    <feGaussianBlur stdDeviation="8" in="SourceAlpha" result="LIGHTING-EFFECTS-10"></feGaussianBlur>
+    <feSpecularLighting surfaceScale="9" specularConstant="0.9" specularExponent="10" lighting-color="#blue" in="LIGHTING-EFFECTS-10" result="LIGHTING-EFFECTS-20">
+      <fePointLight x="-100" y="-200" z="100"></fePointLight>
+    </feSpecularLighting>
+    <feComposite operator="in" in="LIGHTING-EFFECTS-20" in2="SourceAlpha" result="LIGHTING-EFFECTS-30"></feComposite>
+    <feComposite in="SourceGraphic" in2="LIGHTING-EFFECTS-30" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="LIGHTING-EFFECTS-40"></feComposite>
+    <!-- LIGHTING EFFECTS END-->
+
+    <!-- COLOR EFFECTS -->
+    <feComponentTransfer in="LIGHTING-EFFECTS-40" result="COLOR-EFFECTS_10">
+      <feFuncR id="RedT" type="table" tableValues="0 6 1 0 3"></feFuncR>
+      <feFuncG id="GrnT" type="table" tableValues="2 0 1 3 2"></feFuncG>
+      <feFuncB id="BluT" type="table" tableValues="1 -1 0 1 1"></feFuncB>
+    </feComponentTransfer>
+
+    <feColorMatrix type="matrix" values="0.6 0.2 0 -0.3 0,
+    -0.5 1 0 -0.1 0,
+    -0.4 0.5 0.7 0 0,
+    0 0 0 1 0" in="COLOR-EFFECTS_10" result="COLOR-EFFECTS_20"></feColorMatrix>
+    <!-- COLOR EFFECTS END-->
+
+    <feMerge>
+      <feMergeNode in="OUTLINE_20"></feMergeNode>
+      <feMergeNode in="COLOR-EFFECTS_20"></feMergeNode>
+    </feMerge>
+  </filter>
+
+  <filter id="lineart__text--posterize2">
+    <!-- COLORS -->
+    <feFlood flood-color="#551C0B" result="COLOR-outline"></feFlood>
+    <!-- COLORS END-->
+
+    <!-- OUTLINE -->
+    <feMorphology operator="dilate" radius="5" in="SourceAlpha" result="OUTLINE_10"></feMorphology>
+    <feComposite operator="in" in="COLOR-outline" in2="OUTLINE_10" result="OUTLINE_20"></feComposite>
+    <!-- OUTLINE END -->
+
+    <!-- LIGHTING EFFECTS -->
+    <feGaussianBlur stdDeviation="4" in="SourceAlpha" result="LIGHTING-EFFECTS_10"></feGaussianBlur>
+    <feSpecularLighting surfaceScale="5" specularConstant="0.8" specularExponent="7.5" lighting-color="#white" in="LIGHTING-EFFECTS_10" result="LIGHTING-EFFECTS_20">
+      <fePointLight x="-250" y="-50" z="300"></fePointLight>
+    </feSpecularLighting>
+    <feComposite operator="in" in="LIGHTING-EFFECTS_20" in2="SourceAlpha" result="LIGHTING-EFFECTS_30"></feComposite>
+    <feComposite in="SourceGraphic" in2="LIGHTING-EFFECTS_30" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="LIGHTING-EFFECTS_40"></feComposite>
+    <!-- LIGHTING EFFECTS END -->
+
+    <!-- COLOR EFFECTS -->
+    <feComponentTransfer in="LIGHTING-EFFECTS_40" result="COLOR-EFFECTS_10">
+      <feFuncR type="gamma" offset="-0.3" amplitude="1.1" exponent="4.84"></feFuncR>
+      <feFuncG type="gamma" offset="-0.3" amplitude="3.1" exponent="4.84"></feFuncG>
+      <feFuncB type="gamma" offset="13.3" amplitude="0.1" exponent="1.84"></feFuncB>
+    </feComponentTransfer>
+    <!-- COLOR EFFECTS END -->
+
+    <feMerge>
+      <feMergeNode in="OUTLINE_20"></feMergeNode>
+      <feMergeNode in="COLOR-EFFECTS_10"></feMergeNode>
+    </feMerge>
+  </filter>
+
+  <filter id="lineart__text--posterize3" height="220%">
+    <!-- COLORS -->
+    <feFlood flood-color="#551C0B" result="COLOR-outline"></feFlood>
+    <!-- COLORS END-->
+
+    <!-- OUTLINE -->
+    <feMorphology operator="dilate" radius="3" in="SourceAlpha" result="OUTLINE_10"></feMorphology>
+    <feComposite operator="in" in="COLOR-outline" in2="OUTLINE_10" result="OUTLINE_20"></feComposite>
+    <!-- OUTLINE END -->
+
+    <!-- LIGHTING EFFECTS -->
+    <feGaussianBlur stdDeviation="4" in="SourceAlpha" result="LIGHTING-EFFECTS_10"></feGaussianBlur>
+    <feSpecularLighting surfaceScale="5" specularConstant="0.5" specularExponent="7.5" lighting-color="#white" in="LIGHTING-EFFECTS_10" result="LIGHTING-EFFECTS_20">
+    <fePointLight x="750" y="-50" z="300"></fePointLight>
+    </feSpecularLighting>
+    <feComposite in2="SourceAlpha" operator="in" in="LIGHTING-EFFECTS_20" result="LIGHTING-EFFECTS_30"></feComposite>
+    <feComposite operator="arithmetic" k1="0" k2="1" k3="1" k4="0" in="SourceGraphic" in2="LIGHTING-EFFECTS_30" result="LIGHTING-EFFECTS_40"></feComposite>
+    <!-- LIGHTING EFFECTS END -->
+
+    <!-- COLOR EFFECTS -->
+    <feComponentTransfer in="LIGHTING-EFFECTS_40" result="COLOR-EFFECTS_10">
+      <feFuncR type="gamma" offset="-1.3" amplitude="10" exponent="4.84"></feFuncR>
+      <feFuncB type="gamma" offset="-1.3" amplitude="10.1" exponent="40.84"></feFuncB>
+    </feComponentTransfer>
+    <!-- COLOR EFFECTS END -->
+
+    <feMerge>
+      <feMergeNode in="OUTLINE_20"></feMergeNode>
+      <feMergeNode in="COLOR-EFFECTS_10"></feMergeNode>
+    </feMerge>
+  </filter>
+
+  <filter id="lineart__text--posterize4" height="220%">
+    <!-- COLORS -->
+    <feFlood flood-color="#551C0B" result="COLOR-outline"></feFlood>
+    <feFlood flood-color="#551C0B" flood-opacity="0" result="TRANSPARENT"></feFlood>
+    <!-- COLORS END-->
+
+    <!-- OUTLINE -->
+    <feMorphology operator="dilate" radius="5" in="SourceAlpha" result="OUTLINE_10"></feMorphology>
+    <feComposite operator="in" in="COLOR-outline" in2="OUTLINE_10" result="OUTLINE_20"></feComposite>
+    <!-- OUTLINE END-->
+
+    <!-- LIGHTING EFFECTS -->
+    <feGaussianBlur stdDeviation="4" in="SourceAlpha" result="LIGHTING-EFFECTS_10"></feGaussianBlur>
+    <feSpecularLighting surfaceScale="7" specularConstant="0.8" specularExponent="7" lighting-color="#white" in="LIGHTING-EFFECTS_10" result="LIGHTING-EFFECTS_20">
+      <fePointLight x="-100" y="-150" z="200"></fePointLight>
+    </feSpecularLighting>
+    <feComposite operator="in" in="LIGHTING-EFFECTS_20" in2="SourceAlpha" result="LIGHTING-EFFECTS_30"></feComposite>
+    <feComposite operator="arithmetic" k1="0" k2="1" k3="1" k4="0" in="SourceGraphic" in2="LIGHTING-EFFECTS_30" result="LIGHTING-EFFECTS_40"></feComposite>
+    <!-- LIGHTING EFFECTS END-->
+
+    <!-- COLOR EFFECTS -->
+    <feComponentTransfer in="LIGHTING-EFFECTS_40" result="COLOR-EFFECTS_10">
+      <feFuncR id="RedT" type="table" tableValues="13 6 1 0 3"></feFuncR>
+      <feFuncG id="GrnT" type="table" tableValues="2 0 0 1"></feFuncG>
+      <feFuncB id="BluT" type="table" tableValues="1 0 0 -8"></feFuncB>
+    </feComponentTransfer>
+    <!-- COLOR EFFECTS END-->
+
+    <feMerge>
+      <feMergeNode in="OUTLINE_20"></feMergeNode>
+      <feMergeNode in="COLOR-EFFECTS_10"></feMergeNode>
+      <feMergeNode in="TRANSPARENT"></feMergeNode>
+    </feMerge>
+  </filter>
+
+  <filter id="lineart__text--grundge1">
+    <!-- 1. create an feTurbulence fractal fill -->
+
+    <feTurbulence result="TURBULENCE" baseFrequency="0.08"
+    numOctaves="1" seed="1" />
+
+    <!-- 2. create a displacement map that takes the fractal fill as an input to distort the target: -->
+
+    <feDisplacementMap in="SourceGraphic" in2="TURBULENCE" scale="9" />
+  </filter>
+
+  <filter id="lineart__text--grundge2">
+    <!-- COLORS -->
+      <feFlood flood-color="#582D1B" result="COLOR-red"></feFlood>
+    <!-- COLORS END -->
+
+    <!-- FRACTAL TEXTURE -->
+      <feTurbulence baseFrequency=".05,.004" top="-50%" type="fractalNoise" numOctaves="4" seed="0" result="FRACTAL-TEXTURE_10"></feTurbulence>
+      <feColorMatrix type="matrix" values="0 0 0 0 0,
+      0 0 0 0 0,
+      0 0 0 0 0,
+      0 0 0 -1.2 1.1" in="FRACTAL-TEXTURE_10" result="FRACTAL-TEXTURE_20"></feColorMatrix>
+    <!-- FRACTAL TEXTURE END -->
+
+    <!-- STROKE -->
+      <feMorphology operator="dilate" radius="4" in="SourceAlpha" result="STROKE_10"></feMorphology>
+    <!-- STROKE END -->
+
+    <!-- EXTRUDED BEVEL -->
+     <feConvolveMatrix order="8,8" divisor="1" kernelMatrix="1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1" in="STROKE_10" result="BEVEL_20"></feConvolveMatrix>
+
+      <feOffset dx="4" dy="4" in="BEVEL_20" result="BEVEL_25"></feOffset>
+      <feComposite operator="out" in="BEVEL_25" in2="STROKE_10" result="BEVEL_30"></feComposite>
+      <feComposite in="COLOR-red" in2="BEVEL_30" operator="in" result="BEVEL_40"></feComposite>
+      <feMerge result="BEVEL_50">
+        <feMergeNode in="BEVEL_40"></feMergeNode>
+        <feMergeNode in="SourceGraphic"></feMergeNode>
+      </feMerge>
+     <!-- EXTRUDED BEVEL END -->
+
+    <feComposite in2="FRACTAL-TEXTURE_20" in="BEVEL_50" operator="in"></feComposite>
+  </filter>
+
+  <filter id="lineart__text--outlined">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="OUTLINE"/>
+    <feComposite operator="out" in="OUTLINE" in2="SourceAlpha"/>
+  </filter>
+
+  <filter id="lineart__text--offset">
+    <!-- Offset the input graphic by the amount defined in its "dx" and "dy" attributes: -->
+
+    <feOffset in="SourceGraphic" dx="10" dy="10" />
+  </filter>
+
+  <filter id="lineart__text--extruded">
+    <!-- Define a convolve matrix that applies a bevel. -->
+
+    <!-- Order defines the depth of the extrusion; angle is defined by the position of "1" in the matrix. Here we see a 45-degree, 4-pixel deep extrusion: -->
+
+    <feConvolveMatrix order="4,4"
+       kernelMatrix="
+       1 0 0 0
+       0 1 0 0
+       0 0 1 0
+       0 0 0 1" in="SourceAlpha" result="BEVEL" />
+
+    <!-- offset extrusion: -->
+
+    <feOffset dx="2" dy ="2" in="BEVEL" result="OFFSET" />
+
+    <!-- merge offset with Source: -->
+
+    <feMerge>
+       <feMergeNode in="OFFSET" />
+       <feMergeNode in="SourceGraphic" />
+    </feMerge>
+  </filter>
+
+  <filter id="lineart__text--noise-fill">
+    <feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="5" seed="2" />
+  </filter>
+
+  <filter id="lineart__text--pattern-striped">
+    <!-- The following code will create a 100 × 200-pixel square filled with "myfill.svg": -->
+
+    <feImage href='data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D%22100%22%20height%3D%22100%22%3E%3Crect%20width%3D%2250%22%20height%3D%2250%20%2F%3E%3C%2Fsvg%3E' x="0" y="0" width="100" height="200" result="IMAGEFILL"/>
+
+    <!-- We then use this fill as an input for feTile, creating a repeating pattern this way: -->
+
+    <feTile in="IMAGEFILL" resulte="TILEPATTERN"/>
+
+    <!-- Now we will use feComposite to "cut off" SourceAlpha’s transparent areas from the fill: -->
+
+    <feComposite operator="in" in="TILEPATTERN" in2="SourceAlpha" />
+  </filter>
+
+  <filter id="lineart__text--bevel">
+    <!--We create a heightmap by blurring the source: -->
+
+    <feGaussianBlur stdDeviation="5" in="SourceAlpha" result="BLUR"/>
+
+    <!-- We then define a lighting effect with a point light that is positioned at virtual 3D coordinates x: 40px, y: -30px, z: 200px: -->
+
+    <feSpecularLighting surfaceScale="6" specularConstant="1" specularExponent="30" lighting-color="#white" in="BLUR" result="SPECULAR">
+        <fePointLight x="40" y="-30" z="200" />
+    </feSpecularLighting>
+
+    <!-- We cut off the parts that overlap the source graphic… -->
+
+    <feComposite operator="in" in="SPECULAR" in2="SourceAlpha" result="COMPOSITE"/>
+
+    <!-- … and then merge source graphic and lighting effect: -->
+
+    <feMerge>
+        <feMergeNode in="SourceGraphic" />
+        <feMergeNode in="COMPOSITE"/>
+    </feMerge>
+  </filter>
+
+
+
+
+  <filter id="color__alpha--luminanceToAlpha">
+    <feColorMatrix
+      type="luminanceToAlpha"
+      in="SourceGraphic"
     />
-    <object
-      type="image/svg+xml"
-      data="./color/filter.svg"
+  </filter>
+
+
+
+  <filter id="color__colorize--red">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 1 1 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
     />
-    <object
-      type="image/svg+xml"
-      data="./color/colorize.svg"
+  </filter>
+  <filter id="color__colorize--red-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.1 0.1 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
     />
-    <object
-      type="image/svg+xml"
-      data="./color/saturation.svg"
+  </filter>
+  <filter id="color__colorize--red-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.2 0.2 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
     />
-  </foreignObject>
-  <foreignObject>
-    <object
-      type="image/svg+xml"
-      data="./focus/sharpen.svg"
+  </filter>
+  <filter id="color__colorize--red-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.3 0.3 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
     />
-  </foreignObject>
-  <foreignObject>
-    <object
-      type="image/svg+xml"
-      data="./lineart/edge.svg"
+  </filter>
+  <filter id="color__colorize--red-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.4 0.4 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
     />
-    <object
-      type="image/svg+xml"
-      data="./lineart/text.svg"
+  </filter>
+  <filter id="color__colorize--red-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.5 0.5 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
     />
-  </foreignObject>
+  </filter>
+  <filter id="color__colorize--red-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.6 0.6 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--red-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.7 0.7 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--red-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.8 0.8 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--red-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.9 0.9 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--green">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 1 1 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--green-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .1 .1 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--green-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .2 .2 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--green-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .3 .3 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--green-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .4 .4 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--green-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .5 .5 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--green-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .6 .6 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--green-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .7 .7 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--green-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .8 .8 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--green-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .9 .9 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--blue">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              1 1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--blue-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.1 0.1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--blue-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.2 0.2 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--blue-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.3 0.3 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--blue-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.4 0.4 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--blue-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.5 0.5 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--blue-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.6 0.6 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--blue-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.7 0.7 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--blue-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.8 0.8 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--blue-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0.9 0.9 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--yellow">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 1 1 0 0
+              1 1 1 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--yellow-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.1 0.1 0 0
+              0.1 1 0.1 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--yellow-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.2 0.2 0 0
+              0.2 1 0.2 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--yellow-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.3 0.3 0 0
+              0.3 1 0.3 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--yellow-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.4 0.4 0 0
+              0.4 1 0.4 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--yellow-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.5 0.5 0 0
+              0.5 1 0.5 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--yellow-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.6 0.6 0 0
+              0.6 1 0.6 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--yellow-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.7 0.7 0 0
+              0.7 1 0.7 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--yellow-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.8 0.8 0 0
+              0.8 1 0.8 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--yellow-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.9 0.9 0 0
+              0.9 1 0.9 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--magenta">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 1 1 0 0
+              0 1 0 0 0
+              1 1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--magenta-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.1 0.1 0 0
+              0 1 0 0 0
+              0.1 0.1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--magenta-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.2 0.2 0 0
+              0 1 0 0 0
+              0.2 0.2 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--magenta-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.3 0.3 0 0
+              0 1 0 0 0
+              0.3 0.3 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--magenta-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.4 0.4 0 0
+              0 1 0 0 0
+              0.4 0.4 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--magenta-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.5 0.5 0 0
+              0 1 0 0 0
+              0.5 0.5 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--magenta-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.6 0.6 0 0
+              0 1 0 0 0
+              0.6 0.6 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--magenta-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.7 0.7 0 0
+              0 1 0 0 0
+              0.7 0.7 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--magenta-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.8 0.8 0 0
+              0 1 0 0 0
+              0.8 0.8 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--magenta-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0.9 0.9 0 0
+              0 1 0 0 0
+              0.9 0.9 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--cyan">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 1 1 0 0
+              1 1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--cyan-1/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.1 1 0.1 0 0
+              0.1 0.1 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--cyan-2/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.2 1 0.2 0 0
+              0.2 0.2 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--cyan-3/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.3 1 0.3 0 0
+              0.3 0.3 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--cyan-4/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.4 1 0.4 0 0
+              0.4 0.4 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--cyan-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.5 1 0.5 0 0
+              0.5 0.5 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--cyan-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.6 1 0.6 0 0
+              0.6 0.6 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--cyan-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.7 1 0.7 0 0
+              0.7 0.7 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--cyan-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.8 1 0.8 0 0
+              0.8 0.8 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__colorize--cyan-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0.9 1 0.9 0 0
+              0.9 0.9 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+
+
+
+  <filter id="color__filter--red">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--red-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--red-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.2 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--red-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.3 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--red-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.4 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--red-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.5 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--red-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.6 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--red-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.7 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--red-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.8 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--red-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.9 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--green">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--green-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .1 .1 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--green-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .2 .2 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--green-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .3 .3 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--green-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .4 .4 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--green-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .5 .5 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--green-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .6 .6 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--green-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .7 .7 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--green-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .8 .8 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--green-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              1 .9 .9 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--blue">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 0 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--blue-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 0.1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--blue-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 0.2 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--blue-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 0.3 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--blue-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 0.4 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--blue-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 0.5 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--blue-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 0.6 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--blue-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 0.7 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--blue-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 0.8 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--blue-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 1 0 0 0
+              0 0 0.9 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--yellow">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0 0 0 0 0
+              0 0 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--yellow-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.1 0 0 0 0
+              0 0.1 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--yellow-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.2 0 0 0 0
+              0 0.2 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--yellow-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.3 0 0 0 0
+              0 0.3 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--yellow-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.4 0 0 0 0
+              0 0.4 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--yellow-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.5 0 0 0 0
+              0 0.5 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--yellow-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.6 0 0 0 0
+              0 0.6 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--yellow-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.7 0 0 0 0
+              0 0.7 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--yellow-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.8 0 0 0 0
+              0 0.8 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--yellow-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.9 0 0 0 0
+              0 0.9 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--magenta">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0 0 0 0 0
+              0 1 0 0 0
+              0 0 0 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--magenta-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.1 0 0 0 0
+              0 1 0 0 0
+              0 0 0.1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--magenta-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.2 0 0 0 0
+              0 1 0 0 0
+              0 0 0.2 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--magenta-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.3 0 0 0 0
+              0 1 0 0 0
+              0 0 0.3 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--magenta-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.4 0 0 0 0
+              0 1 0 0 0
+              0 0 0.4 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--magenta-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.5 0 0 0 0
+              0 1 0 0 0
+              0 0 0.5 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--magenta-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.6 0 0 0 0
+              0 1 0 0 0
+              0 0 0.6 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--magenta-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.7 0 0 0 0
+              0 1 0 0 0
+              0 0 0.7 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--magenta-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.8 0 0 0 0
+              0 1 0 0 0
+              0 0 0.8 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--magenta-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="0.9 0 0 0 0
+              0 1 0 0 0
+              0 0 0.9 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--cyan">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0 0 0 0
+              0 0 0 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--cyan-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0.1 0 0 0
+              0 0 0.1 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--cyan-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0.2 0 0 0
+              0 0 0.2 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--cyan-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0.3 0 0 0
+              0 0 0.3 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--cyan-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0.4 0 0 0
+              0 0 0.4 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--cyan-5/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0.5 0 0 0
+              0 0 0.5 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--cyan-6/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0.6 0 0 0
+              0 0 0.6 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--cyan-7/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0.7 0 0 0
+              0 0 0.7 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--cyan-8/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0.8 0 0 0
+              0 0 0.8 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+  <filter id="color__filter--cyan-9/10">
+    <feColorMatrix
+      in="SourceGraphic" type="matrix"
+      values="1 0 0 0 0
+              0 0.9 0 0 0
+              0 0 0.9 0 0
+              0 0 0 1 0 "
+    />
+  </filter>
+
+
+
+  <filter id="color__saturation--grayscale" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-1/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.9" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-2/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.8" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-3/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.7" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-4/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.6" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-5/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.5" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-6/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.4" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-7/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.3" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-8/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.2" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--grayscale-9/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.1" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--greyscale" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--greyscale-1/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.9" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--greyscale-2/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.8" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--greyscale-3/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.7" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--greyscale-4/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.6" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--greyscale-5/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.5" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--greyscale-6/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.4" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--greyscale-7/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.3" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--greyscale-8/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.2" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+  <filter id="color__saturation--greyscale-9/10" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+    <feColorMatrix type="saturate" values="0.1" in="SourceGraphic" result="colormatrix"/>
+  </filter>
+
 </svg>

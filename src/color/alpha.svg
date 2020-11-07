@@ -1,8 +1,6 @@
-<svg>
-  <filter id="color__alpha--luminanceToAlpha">
-    <feColorMatrix
-      type="luminanceToAlpha"
-      in="SourceGraphic"
-    />
-  </filter>
-</svg>
+<filter id="color__alpha--luminanceToAlpha">
+  <feColorMatrix
+    type="luminanceToAlpha"
+    in="SourceGraphic"
+  />
+</filter>

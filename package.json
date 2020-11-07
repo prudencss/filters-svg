@@ -4,6 +4,8 @@
   "description": "SVG Image Manipulation Filters",
   "main": "src/index.svg",
   "scripts": {
+    "predeploy": "npm run build",
+    "build": "rm src/*.svg; gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/prudencss/filters-svg/issues"
   },
-  "homepage": "https://github.com/prudencss/filters-svg#readme"
+  "homepage": "https://github.com/prudencss/filters-svg#readme",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1"
+  },
+  "devDependencies": {
+    "gulp-inject-string": "^1.1.2",
+    "gulp-strip-line": "0.0.1"
+  }
 }
