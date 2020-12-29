@@ -1,0 +1,22 @@
+/*-------------------------------
+ * Default toggle to enable/disable the resulting long stylesheet as needed
+ * ------------------------------*/
+
+@import 'variables';
+@import 'mixins';
+
+$3-filters--enabled: true !default;
+
+// CSS Selector Generation on toggle
+
+if $3-filters--enabled {
+  @each $_cat, $_cat-map in $3-filters {
+    @each $_file, $_file-map in $_cat-map {
+      @each $_filter-val in $file-map {
+        .3-filter-#{$_filter_val} {
+          @include 3-filter($_cat, $_file, $_filter-val);
+        }
+      }
+    }
+  }
+}

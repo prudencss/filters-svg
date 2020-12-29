@@ -1,0 +1,7 @@
+@use "sass:map";
+
+// Mixins
+
+@mixin 3-filter($_cat, $_file, $_filter-val) {
+  filter: url("#{map.get($3-filters-paths, collection)}#{$_cat}/#{$_file}.svg##{$_filter-val});
+}
