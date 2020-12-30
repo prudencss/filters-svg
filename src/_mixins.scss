@@ -5,5 +5,5 @@
 // Mixins
 
 @mixin x-filter__css--svg($_cat, $_file, $_filter-val) {
-  filter: url("#{map.get(variables.$x-filters-paths, collection)}#{$_cat}/#{$_file}.svg##{$_filter-val});
+  filter: url("#{map.get(variables.$x-filters-paths, collection)}#{$_cat}/#{$_file}.svg##{$_filter-val}");
 }
