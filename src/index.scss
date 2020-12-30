@@ -9,7 +9,7 @@ $x-filters--enabled: true !default;
 
 // CSS Selector Generation on toggle
 
-if variables.$x-filters--enabled {
+@if variables.$x-filters--enabled {
   @each $_cat, $_cat-map in variables.$x-filters {
     @each $_file, $_file-map in $_cat-map {
       @each $_filter-val in $file-map {
