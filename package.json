@@ -1,6 +1,6 @@
 {
   "name": "@prudencss/filters-svg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SVG Image Manipulation Filters",
   "main": "src/index.svg",
   "scripts": {
@@ -16,7 +16,7 @@
     "svg",
     "filter"
   ],
-  "author": "joehannes",
+    "author": "joehannes",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/prudencss/filters-svg/issues"
